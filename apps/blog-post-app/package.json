@@ -41,5 +41,5 @@
   "devDependencies": {
     "tailwindcss": "^3.4.6"
   },
-  "proxy": "https://newsapi.org"
+  "proxy": "https://gnews.io"
 }

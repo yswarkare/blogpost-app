@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useMatches } from 'react-router-dom';
 
 const headerItems = [
 	{
@@ -13,10 +13,12 @@ const headerItems = [
 ];
 
 const Header = () => {
-	const location = useLocation();
+	const matches = useMatches();
+	const location = matches[1];
 	const [selected, setSelected] = useState();
 
 	useEffect(() => {
+		console.log({ location, matches });
 		if (location?.pathname) {
 			setSelected(location.pathname);
 		}

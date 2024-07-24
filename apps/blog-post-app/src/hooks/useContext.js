@@ -50,7 +50,7 @@ const appReducer = (state, { type, payload }) => {
 			break;
 
 		case actionTypes.set_article_page:
-			const pageArticle = updatedState.articles.find((el) => el.publishedAt === payload);
+			const pageArticle = updatedState.pageContent.find((el) => el.publishedAt === payload);
 			updatedState = { ...updatedState, article: pageArticle };
 			break;
 

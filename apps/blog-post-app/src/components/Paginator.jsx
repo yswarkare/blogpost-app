@@ -10,11 +10,23 @@ const Paginator = () => {
 
 	useEffect(() => {
 		const nums = [];
-		for (let i = 1; i <= numberOfPages; i++) {
+		let [start, end] = [1, numberOfPages];
+		if (numberOfPages > 7) {
+			if (currentPage > 4) {
+				if (numberOfPages - currentPage < 3) {
+					start = currentPage - (7 - (numberOfPages - currentPage + 1));
+				} else start = currentPage - 3;
+			}
+			if (numberOfPages - currentPage > 3) {
+				end = currentPage + 3;
+			}
+		}
+
+		for (let i = start; i <= end; i++) {
 			nums.push(i);
 		}
 		setPageNumbers(nums);
-	}, []);
+	}, [currentPage]);
 
 	return (
 		<div className='w-full flex flex-row justify-around gap-4'>
@@ -24,11 +36,13 @@ const Paginator = () => {
 				</ButtonUi>
 			</div>
 			<div className='w-full flex flex-row justify-around'>
+				{numberOfPages > 7 && currentPage > 4 ? <div className='text-2xl'>...</div> : ''}
 				{pageNumbers.map((num) => (
 					<ButtonUi selected={num === currentPage} onClick={() => navigate(`/${num}`)} disabled={currentPage === num} key={num}>
 						{num}
 					</ButtonUi>
 				))}
+				{numberOfPages > 7 && numberOfPages - currentPage > 3 ? <div className='text-2xl'>...</div> : ''}
 			</div>
 			<div disabled={currentPage >= numberOfPages}>
 				<ButtonUi onClick={() => navigate(`/${currentPage + 1}`)} disabled={currentPage >= numberOfPages}>

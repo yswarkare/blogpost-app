@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { api } from '../utils/axios-api';
 
-const useApiCall = (reqConfig) => {
+const useApiFunction = (apiFunction) => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
 	const [response, setResponse] = useState(null);
@@ -9,7 +8,7 @@ const useApiCall = (reqConfig) => {
 	const getHeadlines = async () => {
 		try {
 			setLoading(true);
-			const res = await api.request(reqConfig);
+			const res = await apiFunction();
 			console.log(res);
 			setResponse(res);
 		} catch (error) {
@@ -36,4 +35,4 @@ const useApiCall = (reqConfig) => {
 	return [response, loading, error];
 };
 
-export default useApiCall;
+export default useApiFunction;
